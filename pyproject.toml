@@ -1,0 +1,21 @@
+[project]
+name = "mushroll_user"
+version = "0.1.0"
+description = "User profile and balance service"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.110",
+    "sqlalchemy>=2.0",
+    "asyncpg",
+    "pydantic>=2.0",
+    "faststream[rabbitmq]>=0.4.6",
+    "mushroll_shared @ file../mushroll_shared"
+]
+
+[tool.ruff]
+select = ["E", "F", "I", "N", "UP"]
+line-length = 100
+
+[tool.mypy]
+strict = true
+ignore_missing_imports = true

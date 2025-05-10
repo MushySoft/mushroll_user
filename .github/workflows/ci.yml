@@ -1,0 +1,31 @@
+name: Lint & Test
+
+on: [push, pull_request]
+
+jobs:
+  test-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install uv
+        run: pip install uv
+
+      - name: 📦 Install dependencies
+        run: uv pip install
+
+      - name: 🔎 Ruff (linting)
+        run: ruff check .
+
+      - name: 🔎 Mypy (type checking)
+        run: mypy .
+
+      - name: 🧪 Run Pytest
+        run: pytest --maxfail=1 --disable-warnings
